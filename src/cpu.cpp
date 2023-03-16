@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cpu.h>
+#include "cpu.h"
 #include <cstdio>
 
 CPU::CPU(Bus &bus) : mem(bus), bus(bus) {
@@ -53,7 +53,6 @@ int CPU::run() {
     is_indirect_y = false;
     operation_cycles = 0;
     opcode = mem.readByte(pc);
-    //printf("%4d | PC:%04X %02X A:%02X X:%02X Y:%02X P:%02X SP:%02X CYC:%ld\n", count, program_counter, opcode, reg_a, reg_x, reg_y, getStatusToByte(false), stack_pointer, total_cycles);
     decode(opcode);
     if (!is_pc_changed) {
         pc++;

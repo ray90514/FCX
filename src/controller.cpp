@@ -1,4 +1,4 @@
-#include <controller.h>
+#include "controller.h"
 void Controller::setInput(Button button) {
     this->input |= 1 << button;
 }

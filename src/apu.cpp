@@ -1,4 +1,4 @@
-#include <apu.h>
+#include "apu.h"
 #include <cstdio>
 APU::APU() {
     pulse_channel_1.is_pulse_1 = true;

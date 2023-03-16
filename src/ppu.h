@@ -1,7 +1,7 @@
 #ifndef _PPU_H
 #define _PPU_H
 #include <cstdint>
-#include <cartridge.h>
+#include "cartridge.h"
 class PPU
 {
     enum Reg {

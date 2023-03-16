@@ -1,9 +1,9 @@
 #ifndef _CPU_H
 #define _CPU_H
 #include <cstdint>
-#include <bus.h>
-#include <ppu.h>
-#include <cartridge.h>
+#include "bus.h"
+#include "ppu.h"
+#include "cartridge.h"
 class CPU {
 public:
     using Byte = uint8_t;
@@ -85,4 +85,4 @@ private:
     void transfer(Byte src, Byte *dst);
     void interrupt(bool is_instruction_interupt);
 };
-#endif 
+#endif

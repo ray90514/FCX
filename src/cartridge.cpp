@@ -1,4 +1,4 @@
-#include <cartridge.h>
+#include "cartridge.h"
 
 Cartridge::Cartridge() {
     loadRom("test.nes");

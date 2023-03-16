@@ -1,15 +1,14 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include <SDL.h>
-#include <SDL_render.h>
-#include <fcx.h>
-#include <cpu.h>
-#include <ppu.h>
-#include <apu.h>
-#include <cartridge.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
+#include "fcx.h"
+#include "cpu.h"
+#include "ppu.h"
+#include "apu.h"
+#include "cartridge.h"
 typedef uint8_t Byte;
 typedef uint16_t Word;
 uint8_t* LoadFile() {
@@ -47,12 +46,10 @@ void loadPal() {
         v = 0;
         file.read((char*)&v, 3);
         v = (v & 0xFF0000) >> 16 | (v & 0x00FF00) | (v & 0x0000FF) << 16;
-        //std::cout <<"0x"<<std::uppercase<<std::hex<< v << ", ";
     }
     std::cout << '}';
 }
-void pollInput() {
-}
+
 int main(int argc, char* argv[]) {
     void *buffer;
     uint32_t delay_buffer[256 * 240] = { 0 };
@@ -99,7 +96,6 @@ int main(int argc, char* argv[]) {
     uint16_t audio_buffer[735];
     uint32_t current_sample = 0;
     uint32_t prev_sample = 0;
-    std::fstream audio_output("audio_output.pcm", std::fstream::out);
     while(!close) {
         start_counter = SDL_GetPerformanceCounter();
         cpu_time = 0;
@@ -159,7 +155,6 @@ int main(int argc, char* argv[]) {
             //run_time += (SDL_GetPerformanceCounter() - dtime1) / (float)SDL_GetPerformanceFrequency();
         }
         SDL_QueueAudio(device_id, audio_buffer, sample_size * sizeof(audio_buffer[0]));
-        printf("%d\n", sample_size);
         sample_size = 0;
         frame = (frame + 1) % 60;
         SDL_LockTexture(texture, NULL, &buffer, &pitch);
@@ -185,10 +180,6 @@ int main(int argc, char* argv[]) {
             SDL_Delay(16 - dtime);
         }
     }
-    //SDL_PauseAudioDevice(device_id, 0);
-    //SDL_Delay(10000);
-    audio_output.close();
     ppu.test();
     return 0;
 }
-#undef main

@@ -1,4 +1,4 @@
-#include <ram.h>
+#include "ram.h"
 
 RAM::RAM() {
 	mem = new RAM::byte[2048];

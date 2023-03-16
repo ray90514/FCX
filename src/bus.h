@@ -1,10 +1,10 @@
 #ifndef _BUS_H_
 #define _BUS_H_
 #include <cstdint>
-#include <ppu.h>
-#include <apu.h>
-#include <cartridge.h>
-#include <controller.h>
+#include "ppu.h"
+#include "apu.h"
+#include "cartridge.h"
+#include "controller.h"
 class Bus {
 public:
     using Byte = uint8_t;
@@ -31,4 +31,4 @@ private:
     void getOAMBuffer(Byte address);
     Byte oam_buffer[256];
 };
-#endif;
+#endif
